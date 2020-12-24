@@ -1,0 +1,6 @@
+.idea/
+node_modules/
+*firebase-adminsdk*.json
+build/
+*error.log
+.env
