@@ -12,6 +12,8 @@ const isAuthenticated = async (req: Request, res: Response, next: NextFunction):
         const bearer = authorization.replace(/^Bearer\s/, '');
         // @ts-ignore
         req.user = await firebase.auth().verifyIdToken(bearer);
+        // @ts-ignore
+        req.idToken = bearer;
         next();
     } catch {
         res.status(401).send();

@@ -1,13 +1,13 @@
-import { Application, Router } from 'express';
+import { Application } from 'express';
 import middlewares from './services/middlewares';
-import { postRegisterUser } from './controllers/userController';
+import { getFirebaseAction, postRegisterUser } from './controllers/userController';
+import Router from './services/Router';
 
-const publicRouter: Router = Router();
+const router = new Router();
 
-const router = (): Router => publicRouter;
-
-publicRouter.post('/register', [middlewares.isAuthenticated], postRegisterUser);
+router.post('/register', [middlewares.isAuthenticated], postRegisterUser);
+router.get('/firebase/actions', [], getFirebaseAction);
 
 export const useRouters = (app: Application): void => {
-    app.use('/api', router());
+    app.use('/api', router.router());
 };

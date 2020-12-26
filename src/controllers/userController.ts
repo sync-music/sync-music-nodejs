@@ -1,12 +1,21 @@
-import { Request, Response } from 'express';
-import { registerUser } from '../services/user';
+import { acitveUser, registerUser } from '../services/user';
+import { Request, Response } from '../services/Router';
+import ApiError from '../errors/ApiError';
 
 export const postRegisterUser = async (req: Request, res: Response): Promise<void> => {
-    try {
-        // @ts-ignore
-        await registerUser(req.user);
+    await registerUser(req.user, req.idToken);
+    res.status(201).send();
+};
+
+export const getFirebaseAction = async (req: Request, res: Response): Promise<void> => {
+    const { oobCode, mode } = req.query;
+
+    switch (mode) {
+    case 'verifyEmail':
+        await acitveUser(oobCode as string);
         res.status(201).send();
-    } catch (e) {
-        res.status(e.statusCode).json({ code: e.code });
+        break;
+    default:
+        throw new ApiError('UNIMPLEMENTED_ACTiON');
     }
 };

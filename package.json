@@ -12,6 +12,7 @@
     "lint": "yarn eslint ./src/**/*.ts --color"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "express": "^4.17.1",
     "firebase-admin": "^9.4.2",
     "moment": "^2.29.1",

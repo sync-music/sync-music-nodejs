@@ -7,6 +7,7 @@ const UserSchema = new Schema({
     firebaseId: { type: 'string', unique: true, required: true },
     registrationDate: { type: 'number' },
     isAdmin: { type: 'boolean', default: false },
+    isActive: { type: 'boolean', default: false },
     __v: { type: Number, select: false },
 });
 
@@ -16,6 +17,7 @@ export interface User extends Document {
   firebaseId: string;
   registrationDate: number;
   isAdmin: boolean;
+  isActive: boolean;
 }
 
 export const UserModel: Model<User> = model<User>('User', UserSchema);
