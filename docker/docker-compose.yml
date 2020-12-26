@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  syncmusic_api:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: syncmusic_nodejs
+    restart: always
+    networks:
+      - reverse-proxy
+    env_file:
+      - ../.env
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.SYNC_MUSIC_BACK.rule=Host(`api.syncmusic.maxencemottard.com`)
+      - traefik.http.routers.SYNC_MUSIC_BACK.entrypoints=http
+      - traefik.http.routers.SYNC_MUSIC_BACK.middlewares=https-redirect@file
+      - traefik.http.routers.SYNC_MUSIC_BACK-Https.rule=Host(`api.syncmusic.maxencemottard.com`)
+      - traefik.http.routers.SYNC_MUSIC_BACK-Https.entrypoints=https
+      - traefik.http.routers.SYNC_MUSIC_BACK-Https.middlewares=security@file, compression@file
+      - traefik.http.routers.SYNC_MUSIC_BACK-Https.tls=true
+      - traefik.http.routers.SYNC_MUSIC_BACK-Https.tls.certresolver=letsencrypt
+
+networks:
+  reverse-proxy:
+    external: true
