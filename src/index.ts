@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires,global-require,no-console,import/no-extraneous-dependencies */
 import mongoose from 'mongoose';
-import express, { Application, json } from 'express';
+import express, { json } from 'express';
+import dotenv from 'dotenv';
 
-const app: Application = express();
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
-
+dotenv.config();
 const { MONGO_URL, PORT } = process.env;
 
 const startApp = () => {
+    const app = express();
     const { useRouters } = require('./router');
 
     app.use(json());
