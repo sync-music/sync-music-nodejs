@@ -33,7 +33,7 @@ export default class Router {
                 json.data = e.data;
             }
 
-            res.status(e.statusCode).json(json);
+            res.status(e?.statusCode ?? 400).json(json);
         }
     }
 

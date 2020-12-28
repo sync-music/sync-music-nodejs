@@ -4,7 +4,7 @@ import ApiError from '../errors/ApiError';
 
 export const postRegisterUser = async (req: Request, res: Response): Promise<void> => {
     await registerUser(req.user, req.idToken);
-    res.status(201).send();
+    res.status(201).json({});
 };
 
 export const getFirebaseAction = async (req: Request, res: Response): Promise<void> => {
@@ -13,7 +13,7 @@ export const getFirebaseAction = async (req: Request, res: Response): Promise<vo
     switch (mode) {
     case 'verifyEmail':
         await acitveUser(oobCode as string);
-        res.status(201).send();
+        res.status(201).json({});
         break;
     default:
         throw new ApiError('UNIMPLEMENTED_ACTiON');
