@@ -38,15 +38,15 @@ export default class Router {
     }
 
     post = (endpoint: string, middlewares: Handler[] = [], callback: RouterFunction): void => {
-        this.expressRouter.post(endpoint, middlewares, this.executeFunction(callback) as ExpressFunction);
+        this.expressRouter.post(endpoint, middlewares, callback as ExpressFunction);
     }
 
     get = (endpoint: string, middlewares: Handler[] = [], callback: RouterFunction): void => {
-        this.expressRouter.get(endpoint, middlewares, this.executeFunction(callback) as ExpressFunction);
+        this.expressRouter.get(endpoint, middlewares, callback as ExpressFunction);
     }
 
     delete = (endpoint: string, middlewares: Handler[] = [], callback: RouterFunction): void => {
-        this.expressRouter.delete(endpoint, middlewares, this.executeFunction(callback) as ExpressFunction);
+        this.expressRouter.delete(endpoint, middlewares, callback as ExpressFunction);
     }
 
     router = (): ExpressRouter => this.expressRouter;

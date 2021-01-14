@@ -22,10 +22,12 @@ class BaseRepository<T extends Document> {
 
             return await newObject.save();
         } catch (e) {
-            const requiredErrorKeys = Object.keys(e.errors).filter((key) => e.errors[key].kind === 'required');
+            if (e.errors) {
+                const requiredErrorKeys = Object.keys(e.errors).filter((key) => e.errors[key].kind === 'required');
 
-            if (requiredErrorKeys.length) {
-                throw new ApiError('MISSING_REQUIRED_FIELDS');
+                if (requiredErrorKeys.length) {
+                    throw new ApiError('MISSING_REQUIRED_FIELDS');
+                }
             }
 
             throw new ApiError('UNKNOWN_ERROR');
