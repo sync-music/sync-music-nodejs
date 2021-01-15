@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "94FLWD5X32.com.maxencemottard.syncmusic",
+                "paths": ["/api/firebase/actions"]
+            }
+        ]
+    }
+}

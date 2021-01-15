@@ -11,6 +11,17 @@ export const postRegisterUser = async (req: Request, res: Response): Promise<voi
     }
 };
 
+export const postActiveUser = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { oobCode } = req.body;
+
+        await activeUser(oobCode as string);
+        res.status(201).json({});
+    } catch (e) {
+        res.status(e?.statusCode ?? 400).json(e.data ?? {});
+    }
+};
+
 export const getFirebaseAction = async (req: Request, res: Response): Promise<void> => {
     const { oobCode, mode } = req.query;
 
